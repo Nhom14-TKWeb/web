@@ -1,0 +1,48 @@
+ul.thuonghieuul {
+    list-style-type: none;  
+        
+}
+
+ul.thuonghieuul li {
+    text-decoration: none;  
+}
+
+ul.thuonghieuul li a {
+    text-decoration: none;  
+    color: black;     
+    font-family: 'Times New Roman', Times, serif;      
+}
+
+.headeroffilter{
+    font-weight: bolder;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.prod .card{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}
+
+.prod .card img{
+    height: 300px; object-fit: cover;
+}
+
+.card-title{
+    text-decoration: none;  
+    color: black;     
+    font-family: 'Times New Roman', Times, serif;
+} 
+
+.card-text{
+    text-decoration: none;  
+    color: #B2B2B2;     
+    font-family: 'Times New Roman', Times, serif;
+    font-size: smaller;
+}
+
+.nav-link i{
+    font-size: larger;
+    margin-right: 7px;
+}
