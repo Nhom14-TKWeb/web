@@ -9,9 +9,54 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Tất cả sản phẩm</title>
+    <style>
+      /* Nút lên đầu trang */
+      #scrollTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid #4CAF50; /* Màu của tam giác */
+            cursor: pointer;
+            display: none; /* Mặc định ẩn nút */
+        }
+
+        /* Đổi màu tam giác khi hover */
+        #scrollTopBtn:hover {
+            border-top-color: #45a049; /* Đổi màu khi hover */
+        }
+  </style>
 </head>
 
 <body>
+ 
+  <button id="scrollTopBtn" onclick="scrollToTop()"></button>
+
+  <button id="scrollTopBtn" onclick="scrollToTop()"></button>
+
+    <script>
+        // Lấy nút
+        let mybutton = document.getElementById("scrollTopBtn");
+
+        // Khi người dùng cuộn xuống 20px từ trên cùng của trang, hiển thị nút
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        };
+
+        // Khi người dùng nhấp vào nút, cuộn lên đầu trang
+        function scrollToTop() {
+            document.body.scrollTop = 0; // Cuộn đến đầu trang cho Safari
+            document.documentElement.scrollTop = 0; // Cuộn đến đầu trang cho Chrome, Firefox, IE và Opera
+        }
+    </script>
+
 
     <header>
         <!--Trên -->
