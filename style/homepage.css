@@ -1,0 +1,10 @@
+.brand-name {
+    font-family: 'Playfair Display', serif !important; /* Sử dụng Google Fonts */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
