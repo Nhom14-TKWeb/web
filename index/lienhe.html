@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Radiant Soirée Perfume</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css" integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+          display: flex;
+          justify-content: space-between;
+          padding: 50px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+
+        .contact-form button {
+            background-color:black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Bản đồ -->
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.620651369507!2d105.82538047400848!3d21.007838188499253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac806cfc0845%3A0x3848505bd3b9490f!2zMTIgUC4gQ2jDuWEgQuG7mWMsIFF1YW5nIFRydW5nLCDEkOG7kW5nIMSQYSwgSMOgIE7hu5lpIDEwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1734975265539!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Thông tin liên hệ cửa hàng -->
+    
+    <div class="container">
+        <div class="contact-info">
+            <h2>Thông Tin Liên Hệ</h2>
+            <p><strong>Địa chỉ:</strong> 12 Chùa Bộc, Đống Đa, Hà Nội</p>
+            <p><strong>Số điện thoại:</strong> 0901 234 567</p>
+            <p><strong>Email:</strong> Radiantsoireeservice@gmail.com</p>
+            <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 7: 9:00 - 18:00</p>
+        </div>
+
+    <!-- Form liên hệ -->
+
+    <div class="contact-form">
+            <h2 class="text-center mb-4">Liên Hệ Chúng Tôi</h2>
+            <form class="contact-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Họ và Tên" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <input type="text" placeholder="Tiêu Đề">
+                <textarea placeholder="Lời nhắn của bạn" rows="5" required></textarea>
+                <button type="submit"><i class="fa fa-paper-plane"></i> Gửi ngay</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
