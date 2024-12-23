@@ -54,6 +54,6 @@ a {
 
 /* Màu khi di chuột vào liên kết */
 a:hover {
-    color: #555555; /* Màu thay đổi khi di chuột vào (ví dụ: màu cam) */
+    color: brown; /* Màu thay đổi khi di chuột vào (ví dụ: màu cam) */
     text-decoration: none; /* Giữ nguyên không gạch chân khi di chuột */
 }
