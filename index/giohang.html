@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fastbootstrap@2.2.0/dist/css/fastbootstrap.min.css"
         integrity="sha256-V6lu+OdYNKTKTsVFBuQsyIlDiRWiOmtC8VQ8Lzdm2i4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style/products.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <title>Tất cả sản phẩm</title>
 </head>
 
@@ -95,6 +97,113 @@
           </nav>
           
     </header>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Giỏ hàng của bạn</h2>
+        <table class="table table-bordered" id="cartTable">
+            <thead>
+                <tr>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Tổng</th>
+                    <th scope="col">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <h4 id="totalAmount">Tổng tiền: 0 VND</h4>
+        </div>
+        <a href="#" class="btn btn-success mt-3">Tiến hành thanh toán</a>
+    </div>
+
+    <script>
+        // Lấy giỏ hàng từ localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartTableBody = document.querySelector("tbody");
+        const totalPriceDiv = document.querySelector("#totalAmount");
+
+        // Hàm hiển thị giỏ hàng và tính tổng tiền
+        function renderCart() {
+            if (cart.length === 0) {
+                cartTableBody.innerHTML = "<tr><td colspan='5'>Giỏ hàng của bạn trống.</td></tr>";
+                totalPriceDiv.innerHTML = "Tổng tiền: 0 VND";
+            } else {
+                let total = 0;
+                cartTableBody.innerHTML = '';  // Xóa các sản phẩm cũ trong bảng giỏ hàng
+
+                cart.forEach(item => {
+                    let row = `
+                        <tr>
+                            <td>
+                                <img src="${item.image}" alt="${item.name}" width="100">
+                                ${item.name}
+                            </td>
+                            <td>${item.price.toLocaleString()} VND</td>
+                            <td>
+                                <input type="number" class="form-control quantity" value="${item.quantity}" min="1" data-name="${item.name}">
+                            </td>
+                            <td class="total-price">${(item.price * item.quantity).toLocaleString()} VND</td>
+                            <td><button class="btn btn-danger btn-sm remove-item" data-name="${item.name}">Xóa</button></td>
+                        </tr>
+                    `;
+                    cartTableBody.innerHTML += row;
+
+                    // Cộng tổng tiền
+                    total += item.price * item.quantity;
+                });
+
+                totalPriceDiv.innerHTML = `Tổng tiền: ${total.toLocaleString()} VND`;
+            }
+        }
+
+        // Gọi hàm renderCart để hiển thị giỏ hàng ban đầu
+        renderCart();
+
+        // Lắng nghe sự kiện thay đổi số lượng sản phẩm
+        cartTableBody.addEventListener("input", function(e) {
+            if (e.target.classList.contains("quantity")) {
+                let name = e.target.getAttribute("data-name");
+                let newQuantity = e.target.value;
+
+                // Cập nhật số lượng sản phẩm trong giỏ hàng
+                let product = cart.find(item => item.name === name);
+                if (product) {
+                    product.quantity = parseInt(newQuantity);
+                }
+
+                // Cập nhật lại giỏ hàng trong localStorage
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                // Cập nhật lại tổng tiền
+                renderCart();
+            }
+        });
+
+        // Lắng nghe sự kiện xóa sản phẩm khỏi giỏ hàng
+        cartTableBody.addEventListener("click", function(e) {
+            if (e.target.classList.contains("remove-item")) {
+                let name = e.target.getAttribute("data-name");
+
+                // Xóa sản phẩm khỏi giỏ hàng
+                cart = cart.filter(item => item.name !== name);
+
+                // Cập nhật lại giỏ hàng trong localStorage
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                // Cập nhật lại giỏ hàng và tổng tiền
+                renderCart();
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <footer class="bg-white text-dark py-4" >
         <div style="background-color: #181C14; color: white;" >
           <div class="container" style="padding-top: 10px;" >
