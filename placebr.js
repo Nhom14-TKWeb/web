@@ -1,41 +1,59 @@
-// Thêm sản phẩm vào giỏ hàng
-function addToCart(product) {
-    // Lấy giỏ hàng từ localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+document.addEventListener('DOMContentLoaded', function () {
+    const cartButton = document.querySelector('.btn.btn-default i.fa-cart-plus')?.parentElement;
 
-    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
-    const existingProduct = cart.find(item => item.name === product.name);
+    if (cartButton) {
+        cartButton.addEventListener('click', function () {
+            try {
+                // Lấy thông tin sản phẩm từ giao diện
+                const productNameElement = document.querySelector('.card-title');
+                const productPriceElement = document.querySelector('.card-title + h5');
+                const quantitySelect = document.querySelector('#inlineFormSelectPref');
+                const productImageElement = document.querySelector('.card-img-top');
 
-    if (existingProduct) {
-        existingProduct.quantity += 1; // Tăng số lượng nếu đã có
+                if (!productNameElement || !productPriceElement || !quantitySelect || !productImageElement) {
+                    alert('Không tìm thấy thông tin sản phẩm trên giao diện!');
+                    return;
+                }
+
+                const productName = productNameElement.textContent.trim();
+                const productPrice = parseFloat(
+                    productPriceElement.textContent.trim().replace('Giá:', '').replace('VND', '').replace(/,/g, '')
+                );
+                const quantity = parseInt(quantitySelect.value, 10);
+                const productImage = productImageElement.src;
+
+                // Kiểm tra thông tin hợp lệ
+                if (isNaN(productPrice) || isNaN(quantity) || quantity <= 0 || !productName || !productImage) {
+                    alert('Thông tin sản phẩm không hợp lệ!');
+                    return;
+                }
+
+                // Lấy giỏ hàng từ localStorage
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
+                const existingProductIndex = cart.findIndex(item => item.name === productName);
+
+                if (existingProductIndex !== -1) {
+                    cart[existingProductIndex].quantity += quantity; // Cộng dồn số lượng
+                } else {
+                    cart.push({
+                        name: productName,
+                        price: productPrice,
+                        quantity: quantity,
+                        image: productImage
+                    });
+                }
+
+                // Lưu giỏ hàng vào localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`Đã thêm ${quantity} x ${productName} vào giỏ hàng!`);
+            } catch (error) {
+                console.error('Lỗi xảy ra khi thêm sản phẩm vào giỏ hàng:', error);
+                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+            }
+        });
     } else {
-        cart.push({ ...product, quantity: 1 }); // Thêm sản phẩm mới
+        console.error('Không tìm thấy nút thêm vào giỏ hàng.');
     }
-
-    // Lưu lại giỏ hàng vào localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Thông báo thêm thành công
-    alert(`Đã thêm ${product.name} vào giỏ hàng!`);
-}
-
-// Lắng nghe sự kiện click vào nút "Thêm vào giỏ hàng"
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-        // Tìm phần tử cha chứa thông tin sản phẩm
-        const productCard = button.closest('.card-body');
-
-        // Lấy tên sản phẩm
-        const name = productCard.querySelector('h5.card-title > a').textContent;
-
-        // Lấy giá sản phẩm và chuyển thành số
-        const priceText = productCard.querySelector('p.product-price').textContent;
-        const price = parseFloat(priceText.replace(/[^\d]/g, ''));
-
-        // Tạo đối tượng sản phẩm
-        const product = { name, price };
-
-        // Thêm sản phẩm vào giỏ hàng
-        addToCart(product);
-    });
 });
