@@ -284,50 +284,50 @@
   
          <script>
             function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
 
-    cartItems.innerHTML = '';
-    let total = 0;
+                cartItems.innerHTML = '';
+                let total = 0;
 
-    cart.forEach((product, index) => {
-        const productTotal = product.quantity * parseFloat(product.price);
-        total += productTotal;
+                    cart.forEach((product, index) => {
+                        const productTotal = product.quantity * parseFloat(product.price);
+                        total += productTotal;
 
-        cartItems.innerHTML += `
-            <tr>
-                <td>${product.name}</td>
-                <td><img src="${product.image}" width="50"></td>
-                <td>${product.quantity}</td>
-                <td>${product.price.toLocaleString()} VND</td>
-                <td>${productTotal.toLocaleString()} VND</td>
-                <td><button onclick="removeFromCart(${index})">Xóa</button></td>
-            </tr>
-        `;
-    });
+                        cartItems.innerHTML += `
+                            <tr>
+                                <td>${product.name}</td>
+                                <td><img src="${product.image}" width="50"></td>
+                                <td>${product.quantity}</td>
+                                <td>${product.price.toLocaleString()} VND</td>
+                                <td>${productTotal.toLocaleString()} VND</td>
+                                <td><button onclick="removeFromCart(${index})">Xóa</button></td>
+                            </tr>
+                        `;
+                    });
 
-    cartTotal.textContent = `Tổng cộng: ${total.toLocaleString()} VND`;
-}
+                    cartTotal.textContent = `Tổng cộng: ${total.toLocaleString()} VND`;
+                }
 
-// Hàm xóa sản phẩm
-function removeFromCart(index) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    loadCart();
-}
+                // Hàm xóa sản phẩm
+                function removeFromCart(index) {
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    loadCart();
+                }
 
-// Hàm xóa toàn bộ giỏ hàng
-function clearCart() {
-    localStorage.removeItem('cart');
-    loadCart();
-}
+                // Hàm xóa toàn bộ giỏ hàng
+                function clearCart() {
+                    localStorage.removeItem('cart');
+                    loadCart();
+                }
 
-// Gọi hàm loadCart khi trang được tải
-window.onload = loadCart;
+                // Gọi hàm loadCart khi trang được tải
+                window.onload = loadCart;
 
-         </script>
+                        </script>
         
   </body>
   

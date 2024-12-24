@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const cartButton = document.querySelector('.btn.btn-default i.fa-cart-plus')?.parentElement;
+    const cartButton = document.querySelector('.btn.btn-default i.fa-cart-plus').parentElement;
 
     if (cartButton) {
         cartButton.addEventListener('click', function () {
